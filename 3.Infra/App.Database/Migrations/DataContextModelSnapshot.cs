@@ -22,6 +22,303 @@ namespace App.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("App.Domain.ActionHistoryEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<DateTime?>("actionDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(2)
+                        .HasComment("วันที่ทำ กิจกรรม");
+
+                    b.Property<Guid?>("actionId")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(5)
+                        .HasComment("ประเภทกิจกรรม");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("note")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(3)
+                        .HasComment("รายละเอียดเพิ่มเติม");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.Property<Guid?>("userId")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(4)
+                        .HasComment("ผู้ให้ข้อมูล");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("actionId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("ActionHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.ActionTypeEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("name")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(2)
+                        .HasComment("วิธีกำจัด");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ActionTypes");
+                });
+
+            modelBuilder.Entity("App.Domain.CountGroupEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("name")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(2)
+                        .HasComment("ประมาณการ จำนวนที่พบ");
+
+                    b.Property<int?>("nearbyCount")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(3)
+                        .HasComment("เทียบได้เป็นจำนวน");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.HasKey("id");
+
+                    b.ToTable("CountGroups");
+                });
+
+            modelBuilder.Entity("App.Domain.CountTypeEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("name")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(2)
+                        .HasComment("วิธีตรวจนับ");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.HasKey("id");
+
+                    b.ToTable("CountTypes");
+                });
+
+            modelBuilder.Entity("App.Domain.FoundHistoryEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<Guid?>("countTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(3)
+                        .HasComment("วิธีนับจำนวน");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<DateTime?>("foundDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(2)
+                        .HasComment("วันที่พบ");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("note")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(6)
+                        .HasComment("รายละเอียดเพิ่มเติม");
+
+                    b.Property<Guid?>("placeId")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(4)
+                        .HasComment("ตำแหน่งที่พบ");
+
+                    b.Property<Guid?>("totalFound")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(5)
+                        .HasComment("จำนวนที่พบ");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.Property<Guid?>("userId")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(7)
+                        .HasComment("ผู้ให้ข้อมูล");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("countTypeId");
+
+                    b.HasIndex("placeId");
+
+                    b.HasIndex("totalFound");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("FoundHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.PlaceEntity", b =>
+                {
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1)
+                        .HasComment("คีร์ของข้อมูล");
+
+                    b.Property<string>("amphor")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(4)
+                        .HasComment("อำเภอ");
+
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(200)
+                        .HasComment("เวลาสร้าง");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(202)
+                        .HasComment("ใช้งานได้หรือไม่");
+
+                    b.Property<string>("locationLat")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(8)
+                        .HasComment("Lat");
+
+                    b.Property<string>("locationLong")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(9)
+                        .HasComment("Long");
+
+                    b.Property<string>("name")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(2)
+                        .HasComment("ชื่อเรียกจุดที่พบ");
+
+                    b.Property<string>("nearbyPlace")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(7)
+                        .HasComment("สถานที่ใกล้เคียง");
+
+                    b.Property<string>("province")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(3)
+                        .HasComment("จังหวัด");
+
+                    b.Property<string>("riverName")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(6)
+                        .HasComment("ชื่อแม่น้ำ");
+
+                    b.Property<string>("tumbon")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnOrder(5)
+                        .HasComment("ตำบล");
+
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(201)
+                        .HasComment("เวลาปรับปรุงล่าสุด");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Places");
+                });
+
             modelBuilder.Entity("App.Domain.UserEntity", b =>
                 {
                     b.Property<Guid>("id")
@@ -51,6 +348,21 @@ namespace App.Database.Migrations
                         .HasColumnOrder(202)
                         .HasComment("ใช้งานได้หรือไม่");
 
+                    b.Property<bool?>("isAdmin")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(7)
+                        .HasComment("เป็น Admin");
+
+                    b.Property<bool?>("isResearcher")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(9)
+                        .HasComment("เป็น นักวิจัย");
+
+                    b.Property<bool?>("isWorker")
+                        .HasColumnType("boolean")
+                        .HasColumnOrder(8)
+                        .HasComment("เป็น เจ้าหน้าที่ภาคสนาม");
+
                     b.Property<string>("nickname")
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)")
@@ -77,6 +389,75 @@ namespace App.Database.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("App.Domain.ActionHistoryEntity", b =>
+                {
+                    b.HasOne("App.Domain.ActionTypeEntity", "ActionType_actionId")
+                        .WithMany("ActionHistorys")
+                        .HasForeignKey("actionId");
+
+                    b.HasOne("App.Domain.UserEntity", "User_userId")
+                        .WithMany("ActionHistorys")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("ActionType_actionId");
+
+                    b.Navigation("User_userId");
+                });
+
+            modelBuilder.Entity("App.Domain.FoundHistoryEntity", b =>
+                {
+                    b.HasOne("App.Domain.CountTypeEntity", "CountType_countTypeId")
+                        .WithMany("FoundHistorys")
+                        .HasForeignKey("countTypeId");
+
+                    b.HasOne("App.Domain.PlaceEntity", "Place_placeId")
+                        .WithMany("FoundHistorys")
+                        .HasForeignKey("placeId");
+
+                    b.HasOne("App.Domain.CountGroupEntity", "CountGroup_totalFound")
+                        .WithMany("FoundHistorys")
+                        .HasForeignKey("totalFound");
+
+                    b.HasOne("App.Domain.UserEntity", "User_userId")
+                        .WithMany("FoundHistorys")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("CountGroup_totalFound");
+
+                    b.Navigation("CountType_countTypeId");
+
+                    b.Navigation("Place_placeId");
+
+                    b.Navigation("User_userId");
+                });
+
+            modelBuilder.Entity("App.Domain.ActionTypeEntity", b =>
+                {
+                    b.Navigation("ActionHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.CountGroupEntity", b =>
+                {
+                    b.Navigation("FoundHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.CountTypeEntity", b =>
+                {
+                    b.Navigation("FoundHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.PlaceEntity", b =>
+                {
+                    b.Navigation("FoundHistorys");
+                });
+
+            modelBuilder.Entity("App.Domain.UserEntity", b =>
+                {
+                    b.Navigation("ActionHistorys");
+
+                    b.Navigation("FoundHistorys");
                 });
 #pragma warning restore 612, 618
         }

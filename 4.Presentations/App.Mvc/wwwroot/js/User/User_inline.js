@@ -6,6 +6,9 @@ $("#User_fullname_" + i).val("");
 $("#User_phone_" + i).val("");
 $("#User_email_" + i).val("");
 $("#User_password_" + i).val("");
+$("#User_isAdmin_" + i).prop('checked', false);
+$("#User_isWorker_" + i).prop('checked', false);
+$("#User_isResearcher_" + i).prop('checked', false);
 
 }
 
@@ -16,6 +19,9 @@ $("#User_fullname_" + i).val(data.fullname);
 $("#User_phone_" + i).val(data.phone);
 $("#User_email_" + i).val(data.email);
 $("#User_password_" + i).val(data.password);
+CheckBoxFeedDataToForm($("#User_isAdmin_" + i), data.isAdmin);
+CheckBoxFeedDataToForm($("#User_isWorker_" + i), data.isWorker);
+CheckBoxFeedDataToForm($("#User_isResearcher_" + i), data.isResearcher);
 
 }
 
@@ -27,6 +33,9 @@ UserObject.fullname = obj.find("#User_fullname_" + i).val();
 UserObject.phone = obj.find("#User_phone_" + i).val();
 UserObject.email = obj.find("#User_email_" + i).val();
 UserObject.password = obj.find("#User_password_" + i).val();
+UserObject.isAdmin = CheckBoxGetFromForm(obj.find("#User_isAdmin_" + i));
+UserObject.isWorker = CheckBoxGetFromForm(obj.find("#User_isWorker_" + i));
+UserObject.isResearcher = CheckBoxGetFromForm(obj.find("#User_isResearcher_" + i));
 
     UserObject.active_mode = obj.find("#isActive_" + i + "_User").val();
     return UserObject;
@@ -69,6 +78,9 @@ function User_Get(id, blankItem) {
  tag += '<td><input class="form-control" type="text" id="User_phone_' + (i + 1)+'" /></td>';
  tag += '<td><input class="form-control" type="text" id="User_email_' + (i + 1)+'" /></td>';
  tag += '<td><input class="form-control" type="text" id="User_password_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isAdmin_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isWorker_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isResearcher_' + (i + 1)+'" /></td>';
 
 			tag += '<td><a href="javascript:;" class="btn btn-danger btn-sm" onclick="javascript:User_RemoveUser(this)" id="removeBtn"><i class="fa fa-trash-alt" style="color:white;"></i></a><a href="javascript:;" class="btn btn-primary btn-sm" onclick="javascript:User_RestoreUser(this)" style="display: none;" id="restoreBtn"><i class="fa fa-upload" style="color:white;"></i></a></td>';
 			tag += '</tr>';
@@ -93,6 +105,9 @@ function User_Add() {
  tag += '<td><input class="form-control" type="text" id="User_phone_' + (i + 1)+'" /></td>';
  tag += '<td><input class="form-control" type="text" id="User_email_' + (i + 1)+'" /></td>';
  tag += '<td><input class="form-control" type="text" id="User_password_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isAdmin_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isWorker_' + (i + 1)+'" /></td>';
+ tag += '<td><input class="form-control" type="checkbox" id="User_isResearcher_' + (i + 1)+'" /></td>';
 
 		tag += '<td><a href="javascript:;" class="btn btn-danger btn-sm" onclick="javascript:User_RemoveUser(this)" id="removeBtn"><i class="fa fa-trash-alt" style="color:white;"></i></a><a href="javascript:;" class="btn btn-primary btn-sm" onclick="javascript:User_RestoreUser(this)" style="display: none;" id="restoreBtn"><i class="fa fa-upload" style="color:white;"></i></a></td>';
 		tag += '</tr>';

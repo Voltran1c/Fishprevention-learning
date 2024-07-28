@@ -113,6 +113,9 @@ namespace App.Database
                     phone = m_user.phone,
                     email = m_user.email,
                     password = m_user.password,
+                    isAdmin = m_user.isAdmin,
+                    isWorker = m_user.isWorker,
+                    isResearcher = m_user.isResearcher,
 
 
                     isActive = m_user.isActive,
@@ -159,6 +162,9 @@ namespace App.Database
                 existingEntity.phone = model.phone;
                 existingEntity.email = model.email;
                 existingEntity.password = model.password;
+                existingEntity.isAdmin = model.isAdmin;
+                existingEntity.isWorker = model.isWorker;
+                existingEntity.isResearcher = model.isResearcher;
 
 
                 if (is_force_save)
@@ -190,6 +196,9 @@ namespace App.Database
                 existingEntity.phone = i.phone;
                 existingEntity.email = i.email;
                 existingEntity.password = i.password;
+                existingEntity.isAdmin = i.isAdmin;
+                existingEntity.isWorker = i.isWorker;
+                existingEntity.isResearcher = i.isResearcher;
 
 
                         await _repository.UpdateWithoutCommitAsync(i.id.Value, existingEntity);

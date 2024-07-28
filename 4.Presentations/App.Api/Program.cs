@@ -70,9 +70,39 @@ builder.Services.AddDbContext<DataContext>(c =>
      c.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+builder.Services.AddScoped<IBaseRepository<ActionHistoryEntity, Guid>, BaseRepository<ActionHistoryEntity, Guid>>();
+builder.Services.AddScoped<IActionHistoryService, ActionHistoryService>();
+
+builder.Services.AddScoped<IBaseRepository<ActionTypeEntity, Guid>, BaseRepository<ActionTypeEntity, Guid>>();
+builder.Services.AddScoped<IActionTypeService, ActionTypeService>();
+
+builder.Services.AddScoped<IBaseRepository<CountGroupEntity, Guid>, BaseRepository<CountGroupEntity, Guid>>();
+builder.Services.AddScoped<ICountGroupService, CountGroupService>();
+
+builder.Services.AddScoped<IBaseRepository<CountTypeEntity, Guid>, BaseRepository<CountTypeEntity, Guid>>();
+builder.Services.AddScoped<ICountTypeService, CountTypeService>();
+
+builder.Services.AddScoped<IBaseRepository<FoundHistoryEntity, Guid>, BaseRepository<FoundHistoryEntity, Guid>>();
+builder.Services.AddScoped<IFoundHistoryService, FoundHistoryService>();
+
+builder.Services.AddScoped<IBaseRepository<PlaceEntity, Guid>, BaseRepository<PlaceEntity, Guid>>();
+builder.Services.AddScoped<IPlaceService, PlaceService>();
+
 builder.Services.AddScoped<IBaseRepository<UserEntity, Guid>, BaseRepository<UserEntity, Guid>>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+
+builder.Services.AddAutoMapper(typeof(ActionHistoryMappingProfile));
+
+builder.Services.AddAutoMapper(typeof(ActionTypeMappingProfile));
+
+builder.Services.AddAutoMapper(typeof(CountGroupMappingProfile));
+
+builder.Services.AddAutoMapper(typeof(CountTypeMappingProfile));
+
+builder.Services.AddAutoMapper(typeof(FoundHistoryMappingProfile));
+
+builder.Services.AddAutoMapper(typeof(PlaceMappingProfile));
 
 builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 

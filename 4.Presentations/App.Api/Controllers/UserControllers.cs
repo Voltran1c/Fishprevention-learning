@@ -23,7 +23,7 @@ namespace App.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [Produces("application/json")]
-    //[Authorize]
+    [Authorize]
     [SwaggerTag("บริหารจัดการข้อมูล User")]
 
     public class UserController : BaseController
@@ -286,6 +286,46 @@ namespace App.Controllers
 
             return BadRequest(ModelState);
         }
+
+		/// <summary>
+        /// ปรับปรุง User ข้อมูลทีละหลายรายการ
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <returns>Response Result Message</returns>
+        /// <response code="200">ดำเนินการเรียบร้อย</response>
+        /// <response code="401">ไม่มีสิทธิในการใช้งาน</response>
+        /// <response code="500">มีข้อผิดพลาดในการทำงานจากระบบ</response>  
+        [HttpPut("UpdateMultiple")]
+        [ProducesResponseType(typeof(CommonResponseMessage), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateMultiple([FromBody] List<UserInputModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+				try
+				{
+					int rowCount = await _repository.UpdateMultipleAsync(model, true);
+					var message = new CommonResponseMessage();
+                    message.code = "200";
+                    message.message = $"ปรับปรุงข้อมูลเรียบร้อย จำนวน {rowCount} รายการ";
+                    message.data = null;
+                    return Ok(message);
+				}
+				catch (Exception ex)
+                {
+                    _logger.LogCritical($"Exception while UpdateMultiple.", ex);
+                    return StatusCode(500, $"{ex.Message}");
+                }   
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
 
     }
 }

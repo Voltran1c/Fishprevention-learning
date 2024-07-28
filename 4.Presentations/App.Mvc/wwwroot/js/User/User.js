@@ -26,6 +26,9 @@ $("#User_fullname").val(data.fullname);
 $("#User_phone").val(data.phone);
 $("#User_email").val(data.email);
 $("#User_password").val(data.password);
+CheckBoxFeedDataToForm($("#User_isAdmin"), data.isAdmin);
+CheckBoxFeedDataToForm($("#User_isWorker"), data.isWorker);
+CheckBoxFeedDataToForm($("#User_isResearcher"), data.isResearcher);
 
 }
 
@@ -37,6 +40,9 @@ UserObject.fullname = $("#User_fullname").val();
 UserObject.phone = $("#User_phone").val();
 UserObject.email = $("#User_email").val();
 UserObject.password = $("#User_password").val();
+UserObject.isAdmin = CheckBoxGetFromForm($("#User_isAdmin"));
+UserObject.isWorker = CheckBoxGetFromForm($("#User_isWorker"));
+UserObject.isResearcher = CheckBoxGetFromForm($("#User_isResearcher"));
 
 
     return UserObject;
@@ -168,7 +174,10 @@ var User_setupTable = function (result) {
                 { "data": "nickname" },
                 { "data": "fullname" },
                 { "data": "phone" },
-                { "data": "email" },            
+                { "data": "email" },
+                { "data": "isAdmin" },
+                { "data": "isWorker" },
+                { "data": "isResearcher" },            
         ],
         "columnDefs": [
             {

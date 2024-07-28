@@ -15,12 +15,12 @@ var UserDataPivot = [];
 var User_setupPivotTable = function (result) {
 
     UserDataPivot = result.map(item => [
-        item.nickname,        item.fullname,        item.phone,        item.email,        item.password,
+        item.nickname,        item.fullname,        item.phone,        item.email,        item.password,        item.isAdmin,        item.isWorker,        item.isResearcher,
         item.counter
     ]);
 
     UserDataPivot.unshift([
-        'ชื่อเรียก',        'ชื่อเต็ม',        'โทรศัพท์',        'อีเมล/username',        'รหัสผ่าน',
+        'ชื่อเรียก',        'ชื่อเต็ม',        'โทรศัพท์',        'อีเมล/username',        'รหัสผ่าน',        'เป็น Admin',        'เป็น เจ้าหน้าที่ภาคสนาม',        'เป็น นักวิจัย',
         "จำนวน"
     ]);
 

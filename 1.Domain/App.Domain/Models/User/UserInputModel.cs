@@ -17,6 +17,12 @@ namespace App.Domain
 
         public string? password { get; set; }
 
+        public bool? isAdmin { get; set; }
+
+        public bool? isWorker { get; set; }
+
+        public bool? isResearcher { get; set; }
+
         public string? active_mode { get; set; }
     }
 }

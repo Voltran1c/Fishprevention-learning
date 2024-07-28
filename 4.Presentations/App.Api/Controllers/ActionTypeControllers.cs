@@ -23,7 +23,7 @@ namespace App.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize]
+    //[Authorize]
     [SwaggerTag("บริหารจัดการข้อมูล ActionType")]
 
     public class ActionTypeController : BaseController

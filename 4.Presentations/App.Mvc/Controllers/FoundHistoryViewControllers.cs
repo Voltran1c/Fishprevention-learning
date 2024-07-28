@@ -37,10 +37,10 @@ namespace App.Controllers
             return View();
         }
 
-		//public IActionResult FoundHistory_report()
-        //{    
-        //    return View();
-        //}
+        public IActionResult FoundHistory_report()
+        {
+            return View();
+        }
 
         //public IActionResult FoundHistory_pivot()
         //{    
@@ -49,7 +49,7 @@ namespace App.Controllers
 
         //public IActionResult FoundHistory_inline()
         //{
-		//    if (!MyHelper.checkAuth(_configuration, HttpContext)) return Unauthorized(); // Or UnauthorizedView
+        //    if (!MyHelper.checkAuth(_configuration, HttpContext)) return Unauthorized(); // Or UnauthorizedView
         //    return View();
         //}
 

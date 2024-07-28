@@ -282,7 +282,7 @@ namespace App.Database
                 string username = MyHelper.GetConfig(_configuration, "JasperReportServer:username");
                 string password = MyHelper.GetConfig(_configuration, "JasperReportServer:password");
 
-                string url = $"{mainurl}{reportsite}/xxใส่ชื่อรายงานตรงนี้xx.{model.filetype}?{MyHelper.GetParameterForJasperReport(model)}&j_username={username}&j_password={password}";
+                string url = $"{mainurl}{reportsite}/foundHistory.{model.filetype}?{MyHelper.GetParameterForJasperReport(model)}&j_username={username}&j_password={password}";
 
                 if (model.filetype == "xlsx")
                 {
